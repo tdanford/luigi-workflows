@@ -43,16 +43,20 @@ There are several different WMSs to evaluate.
 System Evaluation 
 -----------------
 
-| System      | Distinct Tasks | Failure | Monitor | Hadoop | Language | 3rd-Party | Docs | License | Local/Cluster | 
-|:-----------:|:--------------:|:-------:|:-------:|:------:|:--------:|:---------:|:----:|:-------:|:-------------:|
-|  Tug        |                |         |         |        |    X     |           |      |    X    |       X       | 
-|  Galaxy     |       X        |   ???   |    X    |        |          |           |      |         |               | 
-|  Hadoop WMS |       X        |    X    |         |        |          |           |      |         |               |  
-|  Luigi      |       X        |    X    |         |        |          |           |      |         |               |  
-|  Snakemake  |      ???       |   ???   |         |        |          |           |      |         |               |  
-|  Ruffus     |      ???       |   ???   |         |        |          |           |      |         |               |  
-|  Queue      |       X        |    X    |         |        |          |           |      |         |               |  
-|  Cloud WMS  |       X        |    X    |         |        |          |           |      |         |               |  
-|  Jenkins    |                |         |         |        |          |           |      |         |               |  
+| System      | Tasks | Failure | Monitor | Hadoop | Language | 3rd-Party | Docs | License | Local/Cluster | 
+|:-----------:|:-----:|:-------:|:-------:|:------:|:--------:|:---------:|:----:|:-------:|:-------------:|
+|  Tug        |       |         |         |        |    X     |           |      |    X    |       X       | 
+|  Galaxy     |   X   |   ???   |    X    |  ???   |    X     |     X     |  X   |    X    |      ???      | 
+|  Hadoop WMS |   X   |    X    |    X    |   X    |    X     |     X     |  X   |    X    |       X       |  
+|  Luigi      |   X   |    X    |    X    |   X    |    X     |     X     |  X   |    X    |       X       |  
+|  Snakemake  |  ???  |   ???   |         |        |   ???    |    (1)    |  X   |    X    |               |  
+|  Ruffus     |  ???  |   ???   |         |        |   ???    |    (1)    |  X   |    X    |               |  
+|  Queue      |   X   |    X    |         |        |          |     X     |  X   |         |       X       |  
+|  Cloud WMS  |   X   |    X    |    X    |        |    X     |     X     |  X   |    X    |       X       |  
+|  Jenkins    |       |         |    X    |        |    X     |     X     |  X   |    X    |               |  
+|  Make       |       |         |         |        |    X     |     X     |  X   |    X    |               |  
+|:-----------:|:-----:|:-------:|:-------:|:------:|:--------:|:---------:|:----:|:-------:|:-------------:|
+
+(1): it's externally developed, but not clear what the support is
 
 

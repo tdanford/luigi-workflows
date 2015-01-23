@@ -1,0 +1,13 @@
+
+*.bam
+*.sam
+*.fasta
+*.fastq
+*.sra
+
+*.amb
+*.ann
+*.pac
+*.bwt
+*.sa
+*.sn
