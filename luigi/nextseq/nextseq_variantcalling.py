@@ -77,7 +77,67 @@ class ConvertSamToBam(luigi.Task):
         return [ AlignFastq(self.sample) ]
 
     def output(self):
-        return [ luigi.LocalTarget(self.output_filename()) ]
+        return luigi.LocalTarget(self.output_filename())
+
+class SortBam(luigi.Task):
+    sample = luigi.Parameter(description='the name of the sample whose bam is to be sorted')
+    logger = logging.getLogger('luigi-interface')
+
+    def requires(self):
+        return [ ConvertSamToBam(self.sample) ]
+
+    def temp_filename(self):
+        return '%s_sorted.%s.bam' % ( self.sample, uuid.uuid4() )
+
+    # java -jar /usr/local/share/java/SortSam.jar I=${sample}.bam O=${sample}_sorted.bam SO=coordinate
+    def run(self):
+        bam = self.input()[0]
+        temp = self.temp_filename()
+        with open(temp, 'w') as outf: 
+            childproc = subprocess.Popen(['java', '-jar', '/usr/local/share/java/SortSam.jar',
+                                          'I=%s' % bam.path, 'O=%s' % temp, 'SO=coordinate'])
+            childproc.wait()
+        os.rename(temp, '%s_sorted.bam' % self.sample)
+
+    def output(self):
+        return luigi.LocalTarget('%s_sorted.bam' % self.sample)
+    
+
+class MarkDuplicates(luigi.Task):
+    sample = luigi.Parameter(description='the name of the sample in which to mark duplicates')
+    logger = logging.getLogger('luigi-interface')
+
+    def requires(self):
+        return [ SortBam(self.sample) ]
+
+    def metrics_file(self):
+        return '%s_dedup_metrics.txt' % self.sample
+
+    def temp_filename(self):
+        return '%s_dedup.%s.bam' % ( self.sample, uuid.uuid4() )
+
+    # java -jar /usr/local/share/java/MarkDuplicates.jar I=${sample}.bam O=${sample}_dedup.bam
+    def run(self):
+        bam = self.input()[0]
+        self.logger.info('bam: %s' % bam.path)
+        temp = self.temp_filename()
+        with open(temp, 'w') as outf: 
+            childproc = subprocess.Popen(['java', '-jar', '/usr/local/share/java/MarkDuplicates.jar',
+                                          'I=%s' % bam.path, 'O=%s' % temp, 'M=%s' % self.metrics_file()])
+            childproc.wait()
+        os.rename(temp, '%s_dedup.bam' % self.sample)
+
+    def output(self):
+        return luigi.LocalTarget('%s_dedup.bam' % self.sample)
+
+class Pipeline(luigi.Task):
+    sample = luigi.Parameter(description='the name of the sample to process') 
+    logger = logging.getLogger('luigi-interface')
+    
+    def requires(self):
+        return [ MarkDuplicates(self.sample) ]
+    
+    def run(self): pass
 
 if __name__=='__main__':
     luigi.run()
