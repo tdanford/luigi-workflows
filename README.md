@@ -26,16 +26,21 @@ The first task was to understand what the requirements for a workflow system wou
 Workflow System Options 
 -----------------------
 
-There are several different WMSs to evaluate. 
 
 * Tug
 * Galaxy 
-* Hadoop-based WMS: (Oozie, Cascading, Crunch, Spark) 
+* Hadoop-based WMS
+ * Oozie, 
+ * Cascading, 
+ * Crunch, 
+ * Spark-based
 * Luigi 
 * Snakemake
 * Ruffus
 * Queue
-* Cloud-based WMS: (Amazon workflow service, Google dataflow?) 
+* Cloud-based WMS
+ * Amazon SWS
+ * Google Cloud Dataflow 
 * Jenkins
 * make
 
@@ -45,17 +50,16 @@ System Evaluation
 
 | System      | Tasks | Failure | Monitor | Hadoop | Language | 3rd-Party | Docs | License | Local/Cluster | 
 |:-----------:|:-----:|:-------:|:-------:|:------:|:--------:|:---------:|:----:|:-------:|:-------------:|
-|  Tug        |       |         |         |        |    X     |           |      |    X    |       X       | 
+|  Tug        | &nbsp;|  &nbsp; | &nbsp;  | &nbsp; |    X     |   &nbsp;  |&nbsp;|    X    |       X       | 
 |  Galaxy     |   X   |   ???   |    X    |  ???   |    X     |     X     |  X   |    X    |      ???      | 
 |  Hadoop WMS |   X   |    X    |    X    |   X    |    X     |     X     |  X   |    X    |       X       |  
 |  Luigi      |   X   |    X    |    X    |   X    |    X     |     X     |  X   |    X    |       X       |  
-|  Snakemake  |  ???  |   ???   |         |        |   ???    |    (1)    |  X   |    X    |               |  
-|  Ruffus     |  ???  |   ???   |         |        |   ???    |    (1)    |  X   |    X    |               |  
-|  Queue      |   X   |    X    |         |        |          |     X     |  X   |         |       X       |  
-|  Cloud WMS  |   X   |    X    |    X    |        |    X     |     X     |  X   |    X    |       X       |  
-|  Jenkins    |       |         |    X    |        |    X     |     X     |  X   |    X    |               |  
-|  Make       |       |         |         |        |    X     |     X     |  X   |    X    |               |  
-|:-----------:|:-----:|:-------:|:-------:|:------:|:--------:|:---------:|:----:|:-------:|:-------------:|
+|  Snakemake  |  ???  |   ???   |  &nbsp; | &nbsp; |   ???    |    (1)    |  X   |    X    |     &nbsp;    |  
+|  Ruffus     |  ???  |   ???   |  &nbsp; | &nbsp; |   ???    |    (1)    |  X   |    X    |     &nbsp;    |  
+|  Queue      |   X   |    X    |  &nbsp; | &nbsp; |   &nbsp; |     X     |  X   | &nbsp;  |       X       |  
+|  Cloud WMS  |   X   |    X    |    X    | &nbsp; |    X     |     X     |  X   |    X    |       X       |  
+|  Jenkins    | &nbsp;|  &nbsp; |    X    | &nbsp; |    X     |     X     |  X   |    X    |     &nbsp;    |  
+|  Make       | &nbsp;|  &nbsp; |  &nbsp; | &nbsp; |    X     |     X     |  X   |    X    |     &nbsp;    |  
 
 (1): it's externally developed, but not clear what the support is
 
